@@ -1,7 +1,7 @@
 {
     "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
     "manifestVersion": "1.5",
-    "version": "17.0.0",
+    "version": "18.0.0",
     "id": "2337305b-1ccf-424d-b7f0-62878d0f2e9e",
     "packageName": "com.contoso.teamsauthsso",
       "developer": {
@@ -27,8 +27,8 @@
           {
               "entityId": "index",
               "name": "Personal Tab",
-              "contentUrl": "https://5e91-2804-14c-bf2f-a532-2c00-934a-577e-c8be.ngrok.io",
-                "websiteUrl": "https://5e91-2804-14c-bf2f-a532-2c00-934a-577e-c8be.ngrok.io",
+              "contentUrl": "https://ccaa-2804-14c-bf2f-a532-9181-7465-5f26-e333.ngrok.io",
+                "websiteUrl": "https://ccaa-2804-14c-bf2f-a532-9181-7465-5f26-e333.ngrok.io",
                 "scopes": [
                   "personal"
               ]
@@ -43,6 +43,6 @@
       ],
       "webApplicationInfo": {
           "id": "2337305b-1ccf-424d-b7f0-62878d0f2e9e",
-          "resource": "api://5e91-2804-14c-bf2f-a532-2c00-934a-577e-c8be.ngrok.io/2337305b-1ccf-424d-b7f0-62878d0f2e9e"
+          "resource": "api://ccaa-2804-14c-bf2f-a532-9181-7465-5f26-e333.ngrok.io/2337305b-1ccf-424d-b7f0-62878d0f2e9e"
       }
   }
