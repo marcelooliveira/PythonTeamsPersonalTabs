@@ -7,15 +7,10 @@ import json
 
 app = Flask(__name__)
 
-app.config.update(
-    Instance="https://login.microsoftonline.com/",
-    TenantId="0ec7eb2f-a6b5-4cd1-9695-3f3ec151ed0c",
-    ClientId="2337305b-1ccf-424d-b7f0-62878d0f2e9e",
-    AppSecret="v.Q7Q~Hz4~41DCXbCr6dNgVoq2fNO0SAwulNT",
-    ApplicationIdURI="api://5e91-2804-14c-bf2f-a532-2c00-934a-577e-c8be.ngrok.io/0ec7eb2f-a6b5-4cd1-9695-3f3ec151ed0c",
-    AuthUrl="/oauth2/v2.0/token",
-    ValidIssuers="https://login.microsoftonline.com/0ec7eb2f-a6b5-4cd1-9695-3f3ec151ed0c/v2.0,https://sts.windows.net/0ec7eb2f-a6b5-4cd1-9695-3f3ec151ed0c/"
-)
+with open('config.json') as f:
+    config = json.load(f)
+
+app.config.update(config)
 
 # Error handler
 class AuthError(Exception):
@@ -25,7 +20,7 @@ class AuthError(Exception):
 
 @app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template('index.html', AppSecret=app.config["AppSecret"])
 
 @app.route("/GetUserAccessToken")
 def GetUserAccessToken():
