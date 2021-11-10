@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <!-- <link rel="icon" href="%PUBLIC_URL%/favicon.ico" /> -->
-    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css" />
-    <title>Microsoft Teams Tab</title>
-  </head>
-  <body>
+{% extends "base.html" %}
+{% block title %}Authentication Starts{% endblock %}
+{% block content %}
     <script type="text/javascript">
       let clientId = '2337305b-1ccf-424d-b7f0-62878d0f2e9e';
       if (clientId != undefined && clientId != null && clientId !== '') {
@@ -137,10 +131,4 @@
           }
       }
   </script>
-    <script src="https://code.jquery.com/jquery-3.1.1.js"
-    integrity="sha384-VC7EHu0lDzZyFfmjTPJq+DFyIn8TUGAJbEtpXquazFVr00Q/OOx//RjiZ9yU9+9m"
-    crossorigin="anonymous"></script>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.8.0/js/MicrosoftTeams.min.js" integrity="sha384-5ilKjPffKMvf1YelNqWjOhy5WJC9rkHpgF9pASMY/eRFlb619wOrCGMVIg/a/71o" crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
-  </body>
-</html>
+{% endblock %}

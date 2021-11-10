@@ -79,9 +79,9 @@ def get_token_auth_header():
 
 @app.route("/Auth/Start")
 def auth_start():
-    return render_template('AuthStart.html', AzureClientId = app.config["ClientId"])
+    return render_template('auth_start.html', AzureClientId = app.config["ClientId"])
 
 @app.route("/Auth/End")
 def auth_end():
-    return render_template('AuthEnd.html')
+    return render_template('auth_end.html')
 
