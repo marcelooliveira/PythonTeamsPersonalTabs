@@ -20,7 +20,7 @@ class AuthError(Exception):
 
 @app.route("/")
 def index():
-    return render_template('index.html', AppSecret=app.config["AppSecret"])
+    return render_template('index.html')
 
 @app.route("/GetUserAccessToken")
 def GetUserAccessToken():

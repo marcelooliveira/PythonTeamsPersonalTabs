@@ -2,7 +2,7 @@
 {% block title %}Authentication Starts{% endblock %}
 {% block content %}
     <script type="text/javascript">
-      let clientId = '2337305b-1ccf-424d-b7f0-62878d0f2e9e';
+      let clientId = '{{AzureClientId}}';
       if (clientId != undefined && clientId != null && clientId !== '') {
           microsoftTeams.initialize();
           // Get the tab context, and use the information to navigate to Azure AD login page
