@@ -7,11 +7,9 @@ from cacheHelper import CacheHelper
 app = Flask(__name__)
 
 this = sys.modules[__name__]
-this.function_directory = None
 this.cacheHelper = None
 
 def main(req: func.HttpRequest, context: func.Context) -> func.HttpResponse:
-    # this.function_directory = context.function_directory
     if this.cacheHelper is None:
         this.cacheHelper = CacheHelper(context.function_directory)
     return func.WsgiMiddleware(app).handle(req, context)
