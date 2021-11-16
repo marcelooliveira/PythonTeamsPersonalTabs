@@ -3,17 +3,11 @@ let accessToken;
 $(document).ready(function () {
     microsoftTeams.initialize();
 
-    $('divLog').append('<br/> getClientSideToken')
-
     getClientSideToken()
         .then((clientSideToken) => {
-            $('divLog').append('<br/> ' + clientSideToken)
-
             return getServerSideToken(clientSideToken);
         })
         .catch((error) => {
-            $('divLog').append('<br/> ' + error)
-
             if (error === "invalid_grant") {
                 // Display in-line button so user can consent
                 $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
@@ -41,7 +35,7 @@ function requestConsent() {
 function getToken() {
     return new Promise((resolve, reject) => {
         microsoftTeams.authentication.authenticate({
-            url: window.location.origin + "/api/Auth/Start",
+            url: window.location.origin + "/api/personal-tab-sso-auth-start",
             width: 600,
             height: 535,
             successCallback: result => {
@@ -74,8 +68,6 @@ function getServerSideToken(clientSideToken) {
         microsoftTeams.getContext((context) => {
             var scopes = ["https://graph.microsoft.com/User.Read"];
             const getUserAccessTokenURL = '/api/GetUserAccessToken';
-
-            $('divLog').append(clientSideToken)
 
             $.ajax({
                 url: getUserAccessTokenURL,
