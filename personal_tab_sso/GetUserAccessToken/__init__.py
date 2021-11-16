@@ -1,5 +1,5 @@
 import azure.functions as func 
-from flask import Flask, render_template, render_template_string, request
+from flask import Flask, request
 import requests
 import json
 import sys
@@ -10,31 +10,22 @@ app = Flask(__name__)
 this = sys.modules[__name__]
 this.function_directory = None
 
+# Error handler
+class AuthError(Exception):
+    def __init__(self, error, status_code):
+        self.error = error
+        self.status_code = status_code
+
 def main(req: func.HttpRequest, context: func.Context) -> func.HttpResponse:
     this.function_directory = context.function_directory
 
     return func.WsgiMiddleware(app).handle(req, context)
 
-@app.route("/api/personal-tab-sso-index")
-def index():
-    index_template_file = f"{this.function_directory}/templates/index.html"
-    auth_js_file = f"{this.function_directory}/static/js/auth.js"
-    index_template = ''
-    auth_js = ''
-
-    with open(index_template_file, 'r') as f:
-        index_template = f.read()
-    
-    with open(file=auth_js_file, mode='r') as f:
-        auth_js = f.read()
-
-    return render_template_string(index_template, auth_js=auth_js)
-
-@app.route("/GetUserAccessToken")
+@app.route("/api/GetUserAccessToken")
 def GetUserAccessToken():
-    idToken = get_token_auth_header()
-    body = f'assertion={idToken}&requested_token_use=on_behalf_of&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&client_id={os.environ.get("ClientId")}@{os.environ.get("TenantId")}&client_secret={os.environ.get("AppSecret")}&scope=https://graph.microsoft.com/User.Read';
     try:
+        idToken = get_token_auth_header()
+        body = f'assertion={idToken}&requested_token_use=on_behalf_of&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&client_id={os.environ.get("ClientId")}@{os.environ.get("TenantId")}&client_secret={os.environ.get("AppSecret")}&scope=https://graph.microsoft.com/User.Read';
         headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "application/json"}
         encoded_data = body.encode('utf-8')
         url = os.environ.get("Instance") + os.environ.get("TenantId") + os.environ.get("AuthUrl")
@@ -79,12 +70,3 @@ def get_token_auth_header():
 
     token = parts[1]
     return token
-
-@app.route("/Auth/Start")
-def auth_start():
-    return render_template('auth_start.html', AzureClientId = os.environ.get("ClientId"))
-
-@app.route("/Auth/End")
-def auth_end():
-    return render_template('auth_end.html')
-

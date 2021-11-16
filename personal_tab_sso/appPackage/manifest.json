@@ -1,7 +1,7 @@
 {
     "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
     "manifestVersion": "1.5",
-    "version": "33.0.0",
+    "version": "50.0.0",
     "id": "2337305b-1ccf-424d-b7f0-62878d0f2e9e",
     "packageName": "com.contoso.teamsauthsso",
       "developer": {
@@ -27,8 +27,7 @@
           {
               "entityId": "index",
               "name": "Personal Tab",
-              "contentUrl": "https://0bd3-2804-14c-bf2f-a532-55b5-3ec6-ab00-9476.ngrok.io",
-                "websiteUrl": "https://0bd3-2804-14c-bf2f-a532-55b5-3ec6-ab00-9476.ngrok.io",
+              "contentUrl": "https://personal-tab-sso-function-app.azurewebsites.net/api/personal-tab-sso-index",
                 "scopes": [
                   "personal"
               ]
@@ -39,10 +38,11 @@
           "messageTeamMembers"
       ],
       "validDomains": [
-          "*.ngrok.io"
+          "*.ngrok.io",
+          "personal-tab-sso-function-app.azurewebsites.net"
       ],
       "webApplicationInfo": {
           "id": "2337305b-1ccf-424d-b7f0-62878d0f2e9e",
-          "resource": "api://0bd3-2804-14c-bf2f-a532-55b5-3ec6-ab00-9476.ngrok.io/2337305b-1ccf-424d-b7f0-62878d0f2e9e"
+          "resource": "api://personal-tab-sso-function-app.azurewebsites.net"
       }
   }
