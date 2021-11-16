@@ -35,8 +35,7 @@ function requestConsent() {
 function getToken() {
     return new Promise((resolve, reject) => {
         microsoftTeams.authentication.authenticate({
-            // url: window.location.origin + "/Auth/Start",
-            url: "https://personal-tab-sso-function-app.azurewebsites.net/api/personal-tab-sso-auth-start",
+            url: window.location.origin + "/api/Auth/Start",
             width: 600,
             height: 535,
             successCallback: result => {
@@ -68,7 +67,7 @@ function getServerSideToken(clientSideToken) {
     return new Promise((resolve, reject) => {
         microsoftTeams.getContext((context) => {
             var scopes = ["https://graph.microsoft.com/User.Read"];
-            const getUserAccessTokenURL = 'https://personal-tab-sso-function-app.azurewebsites.net/api/GetUserAccessToken';
+            const getUserAccessTokenURL = '/api/GetUserAccessToken';
 
             $.ajax({
                 url: getUserAccessTokenURL,
@@ -82,33 +81,6 @@ function getServerSideToken(clientSideToken) {
                     getPhotoAsync(accessToken);
                 }
             })
-
-            fetch(getUserAccessTokenURL, {
-                method: 'get',
-                headers: {
-                    "Content-Type": "application/text",
-                    "Authorization": "Bearer " + clientSideToken
-                }
-            })
-                .then((response) => {
-                    if (response.ok) { 
-                        // return response.text();
-                        return response.body;
-                    } else {
-                        reject(response.error);
-                    }
-                })
-                .then((responseJson) => {
-                    if (IsValidJSONString(responseJson)) {
-                        if (JSON.parse(responseJson).error)
-                            reject(JSON.parse(responseJson).error);
-                    } else if (responseJson) {
-                        accessToken = responseJson;
-                        console.log("Exchanged token: " + accessToken);
-                        getUserInfo(context.userPrincipalName);
-                        getPhotoAsync(accessToken);
-                    }
-                })
         });
     });
 }
