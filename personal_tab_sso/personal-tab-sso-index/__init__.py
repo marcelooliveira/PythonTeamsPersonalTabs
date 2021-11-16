@@ -1,7 +1,9 @@
 import azure.functions as func 
 from flask import Flask, render_template_string
 import sys
+import os
 
+cacheDisabled = (os.environ.get("CacheEnabled") == "false")
 cache = dict()
 
 app = Flask(__name__)
@@ -16,22 +18,14 @@ def main(req: func.HttpRequest, context: func.Context) -> func.HttpResponse:
 
 @app.route("/api/personal-tab-sso-index")
 def index():
-    index_template = get_index_template()
-    auth_js = get_auth_js()
+    index_template = get_file("/templates/index.html")
+    auth_js = get_file("/static/js/auth.js")
 
     return render_template_string(index_template, auth_js=auth_js)
 
-def get_index_template():
-    file = f"{this.function_directory}/templates/index.html"
-    if file not in cache:
-        with open(file, 'r') as f:
-            cache[file] = f.read()
-    return cache[file]
-
-def get_auth_js():
-    file = f"{this.function_directory}/static/js/auth.js"
-    if file not in cache:
-        with open(file, 'r') as f:
-            cache[file] = f.read()
-    return cache[file]
-
+def get_file(file):
+    path = f"{this.function_directory}{file}"
+    if cacheDisabled or path not in cache:
+        with open(path, 'r') as f:
+            cache[path] = f.read()
+    return cache[path]
