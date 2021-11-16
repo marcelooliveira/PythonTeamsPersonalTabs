@@ -30,8 +30,8 @@ def get_index_template():
 
 def get_auth_js():
     file = f"{this.function_directory}/static/js/auth.js"
-    # if file not in cache:
-    with open(file, 'r') as f:
-        cache[file] = f.read()
+    if file not in cache:
+        with open(file, 'r') as f:
+            cache[file] = f.read()
     return cache[file]
 
