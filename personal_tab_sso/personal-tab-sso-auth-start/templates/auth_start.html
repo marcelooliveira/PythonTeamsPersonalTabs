@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 {% block title %}Authentication Starts{% endblock %}
 {% block content %}
+{% endblock %}
+{% block scripts %}
     <script type="text/javascript">
-      let clientId = '{{context["AzureClientId"]}}';
-      if (clientId != undefined && clientId != null && clientId !== '') {
-          microsoftTeams.initialize();
-          // Get the tab context, and use the information to navigate to Azure AD login page
-          microsoftTeams.getContext(function (context) {
+        let clientId = '{{context["AzureClientId"]}}';
+        if (clientId != undefined && clientId != null && clientId !== '') {
+            microsoftTeams.initialize();
+            // Get the tab context, and use the information to navigate to Azure AD login page
+            microsoftTeams.getContext(function (context) {
               // Generate random state string and store it, so we can verify it in the callback
               let state = _guid();
               localStorage.setItem("simple.state", state);

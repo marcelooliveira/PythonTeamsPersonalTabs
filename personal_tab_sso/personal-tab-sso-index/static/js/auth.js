@@ -17,8 +17,8 @@ $(document).ready(function () {
                 // Something else went wrong
             }
         });
-});
-
+    });
+    
 function requestConsent() {
     getToken()
         .then(data => {
