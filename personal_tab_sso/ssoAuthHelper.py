@@ -11,7 +11,12 @@ class AuthError(Exception):
 def GetAccessTokenOnBehalfUser():
   try:
     idToken = get_token_auth_header()
-    body = f'assertion={idToken}&requested_token_use=on_behalf_of&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&client_id={os.environ.get("ClientId")}@{os.environ.get("TenantId")}&client_secret={os.environ.get("AppSecret")}&scope=https://graph.microsoft.com/User.Read';
+    body = f"""assertion={idToken}
+&requested_token_use=on_behalf_of
+&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
+&client_id={os.environ.get("ClientId")}@{os.environ.get("TenantId")}
+&client_secret={os.environ.get("AppSecret")}
+&scope=https://graph.microsoft.com/User.Read""";
     headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "application/json"}
     encoded_data = body.encode('utf-8')
     url = os.environ.get("Instance") + os.environ.get("TenantId") + os.environ.get("AuthUrl")
