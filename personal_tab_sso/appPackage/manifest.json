@@ -1,8 +1,8 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
   "manifestVersion": "1.5",
-  "version": "50.0.0",
-  "id": "2337305b-1ccf-424d-b7f0-62878d0f2e9e",
+  "version": "3.0.0",
+  "id": "612117ca-37ec-4132-a38f-740cc079e1e6",
   "packageName": "com.contoso.teamsauthsso",
     "developer": {
     "name": "Microsoft",
@@ -42,7 +42,7 @@
         "personal-tab-sso-function-app.azurewebsites.net"
     ],
     "webApplicationInfo": {
-        "id": "2337305b-1ccf-424d-b7f0-62878d0f2e9e",
+        "id": "612117ca-37ec-4132-a38f-740cc079e1e6",
         "resource": "api://personal-tab-sso-function-app.azurewebsites.net"
     }
 }

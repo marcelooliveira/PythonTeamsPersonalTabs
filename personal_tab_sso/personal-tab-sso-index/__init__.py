@@ -1,7 +1,6 @@
 import azure.functions as func 
 from flask import Flask, render_template_string
 import sys
-import os
 from cacheHelper import CacheHelper
 
 app = Flask(__name__)
